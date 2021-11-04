@@ -48,4 +48,4 @@ RUN python --version
 RUN pip --version
 
 # default command
-CMD ["velocyto --version"]
+CMD ["velocyto", "--version"]
