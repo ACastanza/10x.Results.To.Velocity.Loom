@@ -21,8 +21,8 @@ RUN apt-get install samtools --yes
 # install python with conda
 RUN mkdir /conda && \
     cd /conda && \
-    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
-    bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda
+    wget https://repo.anaconda.com/miniconda/Miniconda3-py38_4.10.3-Linux-x86_64.sh && \
+    bash Miniconda3-py38_4.10.3-Linux-x86_64.sh -b -p /opt/conda
 ENV PATH="/opt/conda/bin:${PATH}"
 
 # install R dependencies
@@ -41,7 +41,7 @@ RUN pip install velocyto
 
 # copy module files
 COPY src/* /src/
-RUN chmod a+x /src/preprocess.sh
+RUN chmod a+x /src/velocyto_run10x.sh
 
 # display software versions
 RUN python --version
