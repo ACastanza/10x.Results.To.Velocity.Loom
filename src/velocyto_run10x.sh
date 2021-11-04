@@ -58,8 +58,17 @@ while getopts ":c:g:s:m:j:" opt; do
     esac
 done
 
-mkdir -p chromium
-tar -zxvf $chromium -C chromium
+chromium_name=$(basename -- "$chromium")
+chromium_extension="${chromium_name##*.}"
+if [[$gtf_extension == "gz"]]; then
+ unzip_chromium="${chromium_name%.tar.gz}"
+ mkdir -p chromium/$unzip_chromium
+ tar -zxvf $chromium -C chromium/$unzip_chromium
+elif [[$gtf_extension == "zip"]]; then
+ unzip_chromium="${chromium_name%.zip}"
+ mkdir -p chromium
+ unzip $chromium -d chromium
+fi
 
 gtf_name=$(basename -- "$gtf")
 gtf_extension="${gtf_name##*.}"
