@@ -68,6 +68,7 @@ elif [[$gtf_extension == "zip"]]; then
  unzip_chromium="${chromium_name%.zip}"
  mkdir -p chromium
  unzip $chromium -d chromium
+ rm -rf chromium/__MACOSX
 fi
 
 gtf_name=$(basename -- "$gtf")
