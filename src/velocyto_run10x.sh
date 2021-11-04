@@ -5,7 +5,7 @@ set -e
 trap abort ERR PROF
 abort()
 {
-rm -rf chromium
+rm -rf chromium $(basename ${gtf/%.gz}) $(basename ${mask/%.gz})
 
     echo >&2 '
 ***************
@@ -69,6 +69,9 @@ elif [[$gtf_extension == "zip"]]; then
  mkdir -p chromium
  unzip $chromium -d chromium
  rm -rf chromium/__MACOSX
+else
+ echo "Input file is not supported."
+ abort
 fi
 
 gtf_name=$(basename -- "$gtf")
