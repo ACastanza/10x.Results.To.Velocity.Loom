@@ -39,13 +39,13 @@ while getopts ":c:g:s:m:j:" opt; do
         m)
           if [[ $OPTARG =~ ^[^-]+$ ]];then
             mask=`realpath $OPTARG`
-            echo "-f <file containing intervals to mask> = $metadata"
+            echo "-f <file containing intervals to mask> = $mask"
           elif [[ $OPTARG =~ ^-. ]];then
             mask=""
             let OPTIND=$OPTIND-1
           else
-            metadata=`realpath $OPTARG`
-            echo "-f <file containing intervals to mask = $metadata"
+            mask=`realpath $OPTARG`
+            echo "-f <file containing intervals to mask = $mask"
           fi          
             ;;
         j)
