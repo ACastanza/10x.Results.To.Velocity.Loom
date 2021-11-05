@@ -60,11 +60,11 @@ done
 
 chromium_name=$(basename -- "$chromium")
 chromium_extension="${chromium_name##*.}"
-if [[$gtf_extension == "gz"]]; then
+if [[ $chromium_extension == "gz" ]]; then
  unzip_chromium="${chromium_name%.tar.gz}"
  mkdir -p chromium/$unzip_chromium
  tar -zxvf $chromium -C chromium/$unzip_chromium
-elif [[$gtf_extension == "zip"]]; then
+elif [[ $chromium_extension == "zip" ]]; then
  unzip_chromium="${chromium_name%.zip}"
  mkdir -p chromium
  unzip $chromium -d chromium
@@ -76,7 +76,7 @@ fi
 
 gtf_name=$(basename -- "$gtf")
 gtf_extension="${gtf_name##*.}"
-if [[$gtf_extension == "gz"]]; then
+if [ [$gtf_extension == "gz" ]]; then
  unzip_gtf="${gtf_name%.*}"
  gunzip -c $gtf > $unzip_gtf
  gtf=$unzip_gtf
@@ -84,7 +84,7 @@ fi
 
 mask_name=$(basename -- "$mask")
 mask_extension="${mask_name##*.}"
-if [[$mask_extension == "gz"]]; then
+if [[ $mask_extension == "gz" ]]; then
  unzip_mask="${mask_name%.*}"
  gunzip -c $mask > $unzip_mask
  mask=$unzip_mask
