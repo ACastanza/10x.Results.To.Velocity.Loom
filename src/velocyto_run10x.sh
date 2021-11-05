@@ -5,7 +5,7 @@ set -e
 trap abort ERR PROF
 abort()
 {
-rm -rf chromium $(basename ${gtf/%.gz}) $(basename ${mask/%.gz})
+rm -rf chromium $unzip_gtf $unzip_mask
 
     echo >&2 '
 ***************
@@ -34,7 +34,7 @@ while getopts ":c:g:s:m:j:" opt; do
           else
             metadata=`realpath $OPTARG`
             echo "-m <metadata table> = $metadata"
-          fi          
+          fi
             ;;
         m)
           if [[ $OPTARG =~ ^[^-]+$ ]];then
@@ -46,7 +46,7 @@ while getopts ":c:g:s:m:j:" opt; do
           else
             mask=`realpath $OPTARG`
             echo "-f <file containing intervals to mask = $mask"
-          fi          
+          fi
             ;;
         j)
             threads="$OPTARG"
@@ -85,7 +85,7 @@ fi
 mask_name=$(basename -- "$mask")
 mask_extension="${mask_name##*.}"
 if [[$mask_extension == "gz"]]; then
- unzip_mask="${mask_name%.*}" 
+ unzip_mask="${mask_name%.*}"
  gunzip -c $mask > $unzip_mask
  mask=$unzip_mask
 fi
@@ -100,7 +100,7 @@ velocyto run10x \
       $gtf \
       --dtype "uint32";
 
-rm -rf chromium $(basename ${gtf/%.gz}) $(basename ${mask/%.gz})
+rm -rf chromium $unzip_gtf $unzip_mask
 
     echo "Done." ;
  done
